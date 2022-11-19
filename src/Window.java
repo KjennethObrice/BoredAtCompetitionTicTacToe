@@ -11,6 +11,7 @@ public class Window extends JFrame {
     private boolean isActive;
 
     public void init() {
+        new ListenThread().start(); // This is our input thread, and it will run separately from the rest of the code
         if(Main.isHost == true) { // Host gets to go first
             isActive = true;
         } else {
@@ -34,7 +35,7 @@ public class Window extends JFrame {
                             isActive = false;
                             ((JButton) e.getComponent()).setIcon((new ImageIcon(Main.oIcon)));
                             try {
-                                ObjectOutputStream outStream = (ObjectOutputStream) Main.endpoint.getOutputStream();
+                                ObjectOutputStream outStream = new ObjectOutputStream(Main.endpoint.getOutputStream());
                                 outStream.write(((Button) e.getComponent()).coordinate[0]); // Write y
                                 outStream.write(((Button) e.getComponent()).coordinate[1]); // Write x
                             } catch (IOException ex) {
