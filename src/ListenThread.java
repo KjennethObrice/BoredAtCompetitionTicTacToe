@@ -7,6 +7,7 @@ public class ListenThread extends Thread {
         while(true) {
             try {
                 ObjectInputStream ois = new ObjectInputStream(Main.endpoint.getInputStream());
+                System.out.println("Listening");
                 int y = ois.readInt();
                 int x = ois.readInt();
 
